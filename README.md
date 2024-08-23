@@ -63,3 +63,65 @@ Access the KeyCloak admin console by navigating to `http://localhost:9090`
 - ![Security Credentials](images/5.%20KeepNoteOfRealmNameClientIdClientSecretIssuerAndTokenEndpoint.jpg)
 
 
+## Testing Security Integration
+
+To verify the security implementation with KeyCloak, follow these steps to test the authentication and authorization flow:
+
+### 1. Make GET Request Without Token And It Fails
+- Initially, attempt to make a GET request to a secured endpoint without providing any authentication token.
+- Use tools like Postman
+
+![Make GET Request Without Token And It Fails](images/test/1.%20MakeGETrequestWithoutTokenAndItFails.jpg)
+
+### 2. Create New App Token In Postman With Details You Saved
+
+Generate a new access token using Postman by following these streamlined steps:
+
+- **Open Postman**: Launch and prepare to create a new request.
+- **Configure Authentication**:
+  - Navigate to the `Authorization` tab.
+  - Select `OAuth 2.0` and click on `Get New Access Token`.
+- **Input Details**:
+  - Fill in the `Token Name`.
+  - Choose `Client Credentials` for `Grant Type`.
+  - Provide the `Access Token URL`, `Client ID`, and `Client Secret` from your KeyCloak setup.
+  - Click `Request Token` to generate the token.
+- **Verify the Token**:
+  - Ensure the token appears under `Existing Tokens` and verify its validity.
+
+![Create New App Token In Postman With Details You Saved](images/test/2.%20CreateNewAppTokenInPostmanWithDetailsYouSaved.jpg)
+
+### 3. Make The Same GET Request Now
+
+After acquiring your access token, reattempt the initial GET request using Postman, this time including the access token in the request headers:
+
+- **Prepare the Request**:
+  - Set up the GET request URL as before.
+  - Go to the `Authorization` tab.
+  - Choose `Bearer Token` from the type dropdown.
+  - Paste the generated access token into the `Token` field.
+
+- **Send the Request**:
+  - Hit the `Send` button to execute the request with authentication.
+
+This will authenticate the request via KeyCloak, ensuring proper access control is enforced.
+
+![Make The Same GET Request Now](images/test/3.%20MakeTheSameGETRequestNow.jpg)
+
+### 4. Observe The Server Response Which Is 200
+
+Verify the success of the authentication:
+
+- **Check the Response**:
+  - Upon submission of the GET request with the bearer token, observe the server's response.
+  - A `200 OK` status confirms that the endpoint is accessible with a valid token and that the security integration with KeyCloak is operational.
+
+![Observe The Server Response Which Is 200](images/test/4.%20NowObserveTheServerReponseWhichIs200.jpg)
+
+
+
+
+
+
+
+
